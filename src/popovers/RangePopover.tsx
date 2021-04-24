@@ -25,7 +25,8 @@ const useStyles = makeStyles({
     },
     to: {
         marginTop: '15px',
-        fontWeight: 500
+        fontWeight: 500,
+        textAlign: 'center'
     }
 })
 
