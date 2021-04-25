@@ -1,7 +1,7 @@
 import { ThemeProvider } from '@material-ui/core';
 import { createMuiTheme } from '@material-ui/core/styles';
 import React from 'react';
-import Dashboard from './pages/Dashboard/Dashboard';
+import Dashboard from './Dashboard/Dashboard';
 
 const theme = createMuiTheme({
   palette: {

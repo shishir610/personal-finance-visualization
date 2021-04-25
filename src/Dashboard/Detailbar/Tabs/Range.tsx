@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import DateRangeIcon from '@material-ui/icons/DateRange';
 import React, { useState } from 'react';
-import RangePopover from '../../../../popovers/RangePopover';
+import RangePopover from '../../../popovers/RangePopover';
 
 export interface RangeProps {
 

@@ -2,7 +2,6 @@ import { Grid, makeStyles } from '@material-ui/core';
 import React from 'react';
 import Detailbar from './Detailbar/Detailbar';
 import Expandablebar from './Expandablebar/Expandablebar';
-import ExpandedRow from './Expandablebar/ExpandedRow';
 import GraphingArea from './Graphing/GraphingArea';
 import Header from './Heading/Header';
 import MonthsTab from './Months/MonthsTab';
