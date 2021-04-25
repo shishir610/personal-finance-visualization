@@ -1,6 +1,7 @@
 import { Grid, makeStyles } from '@material-ui/core';
 import React, { Fragment, useRef } from 'react';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import ExpandedRow from './ExpandedRow';
 
 export interface ExpandablebarProps {
     name: string,
@@ -65,7 +66,7 @@ const Expandablebar: React.FC<ExpandablebarProps> = ({ name, units }) => {
                 </Grid>
             </a>
             <div ref={divRef} className={classes.expand}>
-                HELLOOOOOOO
+                <ExpandedRow />
             </div>
         </Fragment>
     );
