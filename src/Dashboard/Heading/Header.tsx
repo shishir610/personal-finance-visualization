@@ -13,7 +13,8 @@ const useStyles = makeStyles(theme => {
             alignItems: 'center',
             borderBottom: '2px dotted #d0d0d0',
             borderTop: '2px dotted #d0d0d0',
-            margin: '10px 0',
+            marginTop: '30px',
+            marginBottom: '10px',
             fontSize: '16px',
             fontWeight: 500
         }

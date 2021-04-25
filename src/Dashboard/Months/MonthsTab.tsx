@@ -19,7 +19,8 @@ const useStyles = makeStyles(theme => {
             fontSize: '16px',
             fontWeight: 500,
             overflowX: 'auto',
-            flexDirection: 'row'
+            flexDirection: 'row',
+            marginTop: '40px'
         },
         box: {
             width: '300px',
@@ -87,9 +88,6 @@ const MonthsTab: React.FC<MonthsTabProps> = ({ start, end }) => {
             <div className={classes.box}>
                 MONTHS
             </div>
-            <Grid item className={classes.headerCell} style={{ justifyContent: 'center' }}>
-                <p className={classes.monthYear}>VALUE</p>
-            </Grid>
             {months}
         </Grid>
     );

@@ -1,6 +1,5 @@
 import { Grid, makeStyles } from '@material-ui/core';
 import React from 'react';
-import Detailbar from './Detailbar/Detailbar';
 import Expandablebar from './Expandablebar/Expandablebar';
 import GraphingArea from './Graphing/GraphingArea';
 import Header from './Heading/Header';
@@ -34,10 +33,9 @@ const Dashboard: React.FC<DashboardProps> = (props) => {
     return (
         <div className={classes.root}>
             <Topbar />
-            <Detailbar />
             <Grid container className={classes.main}>
                 <Grid item md={8} className={classes.scrollable}>
-                    <MonthsTab start='2013-11-01' end='2014-04-01' />
+                    <MonthsTab start='2020-10-01' end='2021-04-01' />
                     <Header name='INCOME' />
                     <Expandablebar name="MAIN" units={0} />
                     <Expandablebar name="SIDE HUSTLES" units={0} />

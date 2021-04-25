@@ -73,6 +73,15 @@ const useStyles = makeStyles(theme => {
             fontWeight: 500,
             margin: '0 5px'
         },
+        inputText: {
+            border: 'none',
+            background: 'transparent',
+            outline: 0,
+            width: '100%',
+            height: '100%',
+            fontSize: '16px',
+            padding: '0 10px'
+        }
     }
 })
 
@@ -99,10 +108,13 @@ const ExpandedRow: React.FC<ExpandedRowProps> = ({ first }) => {
                         >
                             <Grid item className={classes.varSection}>
                                 {v['icon']}
-                                <p className={classes.varName}>Base Salary</p>
+                                <input type="text" className={classes.inputText} />
                             </Grid>
                             <Grid item className={classes.headerCell}>
-                                <p className={classes.monthYear}></p>
+                                <input type="text" className={classes.inputText} />
+                            </Grid>
+                            <Grid item className={classes.headerCell}>
+                                <input type="text" className={classes.inputText} />
                             </Grid>
                         </Grid>
                     )
