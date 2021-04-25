@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => {
             margin: '10px 0',
             fontSize: '16px',
             fontWeight: 500
-        },
+        }
     }
 })
 

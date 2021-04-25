@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import React from 'react';
 
 export interface ExpandedRowProps {
-
+    first?: boolean
 }
 
 export interface VarsProps {
@@ -57,11 +57,26 @@ const useStyles = makeStyles(theme => {
             color: '#182D1F',
             fontWeight: 500,
             marginLeft: '5px'
-        }
+        },
+        headerCell: {
+            width: '92px',
+            height: '100%',
+            borderRight: '1px solid #d0d0d0',
+            display: 'flex',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            flexWrap: 'nowrap'
+        },
+        monthYear: {
+            fontFamily: 'Inter',
+            fontSize: '13px',
+            fontWeight: 500,
+            margin: '0 5px'
+        },
     }
 })
 
-const ExpandedRow: React.FC<ExpandedRowProps> = () => {
+const ExpandedRow: React.FC<ExpandedRowProps> = ({ first }) => {
     const classes = useStyles()
     const vars: VarsProps[] = [
         { icon: <i className={`fab fa-slack-hash ${classes.icon} fa-xs`}></i> }
@@ -69,7 +84,7 @@ const ExpandedRow: React.FC<ExpandedRowProps> = () => {
 
     return (
         vars.length === 0 ? (
-            <Grid container className={classes.root}>
+            <Grid container className={classes.root} style={first ? { borderTop: '1px solid #d0d0d0', } : {}}>
                 <AddIcon fontSize='inherit' classes={{ root: classes.addIcon }} />
                 <p className={classes.addAVar}>Add a variable</p>
             </Grid>
@@ -77,10 +92,17 @@ const ExpandedRow: React.FC<ExpandedRowProps> = () => {
             <div>
                 {vars.map(v => {
                     return (
-                        <Grid container className={clsx(classes.root, classes.varRow)}>
+                        <Grid
+                            container
+                            className={clsx(classes.root, classes.varRow)}
+                            style={first ? { borderTop: '1px solid #d0d0d0', } : {}}
+                        >
                             <Grid item className={classes.varSection}>
                                 {v['icon']}
                                 <p className={classes.varName}>Base Salary</p>
+                            </Grid>
+                            <Grid item className={classes.headerCell}>
+                                <p className={classes.monthYear}></p>
                             </Grid>
                         </Grid>
                     )
