@@ -1,33 +1,32 @@
-import {ADD_MAIN, ADD_SIDE_HUSTLES} from '../actions'
+import {ADD_LIQUID, ADD_NON_LIQUID} from '../actions'
 
 let initialState = {
-    main: [],
-    sideHustles: []
+    liquid: [],
+    nonLiquid: []
 }
 
-const incomeReducer = (
+const assetsReducer = (
     previousState = initialState,
     action: {type: string, payload: any}
     ) => {
     const {type, payload} = action
-    console.log(payload)
     switch(type){
-        case ADD_MAIN:
+        case ADD_LIQUID:
             return {
                 ...previousState,
-                main: [
-                    ...previousState.main,
+                liquid: [
+                    ...previousState.liquid,
                     {
                         name: payload.name,
                         vals: payload.vals
                     }
                 ]
             }
-        case ADD_SIDE_HUSTLES:
+        case ADD_NON_LIQUID:
             return {
                 ...previousState,
-                sideHustles: [
-                    ...previousState.sideHustles,
+                nonLiquid: [
+                    ...previousState.nonLiquid,
                     {
                         name: payload.name,
                         vals: payload.vals
@@ -39,4 +38,4 @@ const incomeReducer = (
     }
 }
 
-export default incomeReducer
+export default assetsReducer

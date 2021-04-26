@@ -1,9 +1,9 @@
-export const ADD_MAIN = 'ADD_MAIN'
-export const ADD_SIDE_HUSTLES = 'ADD_SIDE_HUSTLES'
+export const ADD_REGULAR = 'ADD_REGULAR'
+export const ADD_MISC = 'ADD_MISC'
 
-export const addMain = () => {
+export const addRegular = () => {
     return {
-        type: ADD_MAIN,
+        type: ADD_REGULAR,
         payload: {
             name: '',
             vals: ['','','','','','']
@@ -11,9 +11,9 @@ export const addMain = () => {
     }
 }
 
-export const addSideHustles = () => {
+export const addMiscellaneous = () => {
     return {
-        type: ADD_SIDE_HUSTLES,
+        type: ADD_MISC,
         payload: {
             name: '',
             vals: ['','','','','','']

@@ -1,9 +1,9 @@
-export const ADD_MAIN = 'ADD_MAIN'
-export const ADD_SIDE_HUSTLES = 'ADD_SIDE_HUSTLES'
+export const ADD_LIQUID = 'ADD_LIQUID'
+export const ADD_NON_LIQUID = 'ADD_NON_LIQUID'
 
-export const addMain = () => {
+export const addLiquid = () => {
     return {
-        type: ADD_MAIN,
+        type: ADD_LIQUID,
         payload: {
             name: '',
             vals: ['','','','','','']
@@ -11,9 +11,9 @@ export const addMain = () => {
     }
 }
 
-export const addSideHustles = () => {
+export const addNonLiquid = () => {
     return {
-        type: ADD_SIDE_HUSTLES,
+        type: ADD_NON_LIQUID,
         payload: {
             name: '',
             vals: ['','','','','','']

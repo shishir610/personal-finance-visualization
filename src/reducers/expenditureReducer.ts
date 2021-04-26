@@ -1,33 +1,32 @@
-import {ADD_MAIN, ADD_SIDE_HUSTLES} from '../actions'
+import {ADD_REGULAR, ADD_MISC} from '../actions'
 
 let initialState = {
-    main: [],
-    sideHustles: []
+    regular: [],
+    miscellaneous: []
 }
 
-const incomeReducer = (
+const expenditureReducer = (
     previousState = initialState,
     action: {type: string, payload: any}
     ) => {
     const {type, payload} = action
-    console.log(payload)
     switch(type){
-        case ADD_MAIN:
+        case ADD_REGULAR:
             return {
                 ...previousState,
-                main: [
-                    ...previousState.main,
+                regular: [
+                    ...previousState.regular,
                     {
                         name: payload.name,
                         vals: payload.vals
                     }
                 ]
             }
-        case ADD_SIDE_HUSTLES:
+        case ADD_MISC:
             return {
                 ...previousState,
-                sideHustles: [
-                    ...previousState.sideHustles,
+                miscellaneous: [
+                    ...previousState.miscellaneous,
                     {
                         name: payload.name,
                         vals: payload.vals
@@ -39,4 +38,4 @@ const incomeReducer = (
     }
 }
 
-export default incomeReducer
+export default expenditureReducer

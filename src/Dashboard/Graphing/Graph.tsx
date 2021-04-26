@@ -4,6 +4,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import clsx from 'clsx';
 
 export interface GraphProps {
 
@@ -19,12 +20,17 @@ const useStyles = makeStyles(theme => {
             backgroundColor: 'white',
             marginTop: '20px',
             padding: '18px',
+            border: '2px solid white',
+            '&:hover': {
+                border: '2px solid #d0d0d0',
+                cursor: 'pointer'
+            }
         },
         title: {
             margin: '0'
         },
         subTitle: {
-            margin: '5px 0',
+            margin: '2px 0',
             fontSize: '13px',
             color: theme.palette.secondary.main
         },
@@ -38,7 +44,13 @@ const useStyles = makeStyles(theme => {
         chartArea: {
             // background: '#f0f0f0',
             height: '75%'
-        }
+        },
+        inputText: {
+            border: 'none',
+            background: 'transparent',
+            outline: 0,
+            fontSize: '13px',
+        },
     }
 })
 
@@ -60,8 +72,8 @@ const Graph: React.FC<GraphProps> = () => {
         <Grid container className={classes.root}>
             <Grid container style={{ marginBottom: '10px' }}>
                 <Grid item xs={6}>
-                    <p className={classes.title}>NAME</p>
-                    <p className={classes.subTitle}>Description</p>
+                    <input className={clsx(classes.title, classes.inputText)} value={'NAME'}></input>
+                    <input className={clsx(classes.subTitle, classes.inputText)} value={'Description'}></input>
                 </Grid>
                 <Grid item xs={6} className={classes.settings}>
                     <SettingsIcon fontSize='inherit' className={classes.settingsIcon} />

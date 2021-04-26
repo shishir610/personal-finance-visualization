@@ -2,13 +2,16 @@ import { Grid, makeStyles } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import clsx from 'clsx';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 export interface ExpandedRowProps {
-    first?: boolean
+    addVar?: () => void,
+    vars?: VarsProps[]
 }
 
 export interface VarsProps {
-    icon: JSX.Element
+    name: string,
+    vals: string[]
 }
 
 const useStyles = makeStyles(theme => {
@@ -35,9 +38,6 @@ const useStyles = makeStyles(theme => {
             marginLeft: '5px',
             fontSize: '13px',
         },
-        icon: {
-            color: theme.palette.secondary.main,
-        },
         varRow: {
             padding: '0 30px',
             '&:hover': {
@@ -58,7 +58,7 @@ const useStyles = makeStyles(theme => {
             fontWeight: 500,
             marginLeft: '5px'
         },
-        headerCell: {
+        cell: {
             width: '92px',
             height: '100%',
             borderRight: '1px solid #d0d0d0',
@@ -79,43 +79,46 @@ const useStyles = makeStyles(theme => {
             outline: 0,
             width: '100%',
             height: '100%',
-            fontSize: '16px',
+            fontSize: '13px',
             padding: '0 10px'
-        }
+        },
+        icon: {
+            color: theme.palette.secondary.main,
+        },
     }
 })
 
-const ExpandedRow: React.FC<ExpandedRowProps> = ({ first }) => {
+const ExpandedRow: React.FC<ExpandedRowProps> = ({ addVar, vars }) => {
     const classes = useStyles()
-    const vars: VarsProps[] = [
-        { icon: <i className={`fab fa-slack-hash ${classes.icon} fa-xs`}></i> }
-    ]
+    const dispatch = useDispatch()
+
+    console.log(vars)
 
     return (
-        vars.length === 0 ? (
-            <Grid container className={classes.root} style={first ? { borderTop: '1px solid #d0d0d0', } : {}}>
+        vars && vars.length === 0 ? (
+            <Grid container className={classes.root} onClick={addVar ? () => dispatch(addVar()) : () => { }}>
                 <AddIcon fontSize='inherit' classes={{ root: classes.addIcon }} />
                 <p className={classes.addAVar}>Add a variable</p>
             </Grid>
         ) : (
             <div>
-                {vars.map(v => {
+                {vars && vars.map(v => {
                     return (
                         <Grid
                             container
                             className={clsx(classes.root, classes.varRow)}
-                            style={first ? { borderTop: '1px solid #d0d0d0', } : {}}
                         >
                             <Grid item className={classes.varSection}>
-                                {v['icon']}
-                                <input type="text" className={classes.inputText} />
+                                <i className={`fab fa-slack-hash ${classes.icon} fa-xs`}></i>
+                                <input type="text" placeholder='New Variable' className={classes.inputText} />
                             </Grid>
-                            <Grid item className={classes.headerCell}>
-                                <input type="text" className={classes.inputText} />
-                            </Grid>
-                            <Grid item className={classes.headerCell}>
-                                <input type="text" className={classes.inputText} />
-                            </Grid>
+                            {[1, 2, 3, 4, 5, 6].map(_ => {
+                                return (
+                                    <Grid item className={classes.cell}>
+                                        <input type="text" className={classes.inputText} />
+                                    </Grid>
+                                )
+                            })}
                         </Grid>
                     )
                 })}

@@ -5,7 +5,14 @@ import ExpandedRow from './ExpandedRow';
 
 export interface ExpandablebarProps {
     name: string,
-    units: number | null
+    units: number | null,
+    addVar?: () => void
+    vars?: VarsProps[]
+}
+
+export interface VarsProps {
+    name: string,
+    vals: string[]
 }
 
 const useStyles = makeStyles(theme => {
@@ -40,7 +47,7 @@ const useStyles = makeStyles(theme => {
     }
 })
 
-const Expandablebar: React.FC<ExpandablebarProps> = ({ name, units }) => {
+const Expandablebar: React.FC<ExpandablebarProps> = ({ name, units, addVar, vars }) => {
     const classes = useStyles()
     const divRef = useRef<HTMLDivElement | null>(null)
 
@@ -66,7 +73,7 @@ const Expandablebar: React.FC<ExpandablebarProps> = ({ name, units }) => {
                 </Grid>
             </a>
             <div ref={divRef} className={classes.expand}>
-                <ExpandedRow />
+                <ExpandedRow addVar={addVar} vars={vars} />
             </div>
         </Fragment>
     );
