@@ -1,17 +1,20 @@
-import { Grid, makeStyles } from '@material-ui/core';
+import { Grid, makeStyles, Theme, Tooltip, withStyles } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import clsx from 'clsx';
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { handleVarTitleChange } from '../../actions';
 
 export interface ExpandedRowProps {
     addVar?: () => void,
-    vars?: VarsProps[]
+    vars: VarsProps[],
+    name: string,
+    handleClick: (expand: boolean) => void
 }
 
 export interface VarsProps {
     name: string,
-    vals: string[]
+    vals?: string[]
 }
 
 const useStyles = makeStyles(theme => {
@@ -82,48 +85,99 @@ const useStyles = makeStyles(theme => {
             fontSize: '13px',
             padding: '0 10px'
         },
+        cellInput: {
+            color: theme.palette.primary.dark
+        },
         icon: {
             color: theme.palette.secondary.main,
         },
+        newVar: {
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center'
+        },
+        addGraph: {
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+            padding: '0 10px'
+        }
     }
 })
 
-const ExpandedRow: React.FC<ExpandedRowProps> = ({ addVar, vars }) => {
+const LightTooltip = withStyles((theme: Theme) => ({
+    tooltip: {
+        backgroundColor: theme.palette.common.white,
+        color: 'rgba(0, 0, 0, 0.87)',
+        boxShadow: theme.shadows[1],
+        fontSize: 11,
+    }
+}))(Tooltip);
+
+const ExpandedRow: React.FC<ExpandedRowProps> = ({ addVar, vars, name, handleClick }) => {
     const classes = useStyles()
     const dispatch = useDispatch()
 
-    console.log(vars)
-
     return (
-        vars && vars.length === 0 ? (
-            <Grid container className={classes.root} onClick={addVar ? () => dispatch(addVar()) : () => { }}>
-                <AddIcon fontSize='inherit' classes={{ root: classes.addIcon }} />
-                <p className={classes.addAVar}>Add a variable</p>
-            </Grid>
-        ) : (
-            <div>
-                {vars && vars.map(v => {
+        <div>
+            {vars.map((v, id) => {
+                if (v.name === 'newVar' || v.vals == undefined) {
+                    return (
+                        <Grid container className={classes.root}
+                            onClick={addVar ?
+                                () => {
+                                    dispatch(addVar())
+                                    handleClick(false)
+                                } :
+                                () => { }}
+                        >
+                            <AddIcon fontSize='inherit' classes={{ root: classes.addIcon }} />
+                            <p className={classes.addAVar}>Add a variable</p>
+                        </Grid>
+                    )
+                }
+                else {
                     return (
                         <Grid
                             container
                             className={clsx(classes.root, classes.varRow)}
                         >
                             <Grid item className={classes.varSection}>
-                                <i className={`fab fa-slack-hash ${classes.icon} fa-xs`}></i>
-                                <input type="text" placeholder='New Variable' className={classes.inputText} />
+                                <Grid container style={{ height: '100%' }}>
+                                    <Grid item xs={8} className={classes.newVar}>
+                                        <i className={`fab fa-slack-hash ${classes.icon} fa-xs`}></i>
+                                        <input
+                                            type="text"
+                                            id={`${id}`}
+                                            placeholder='New Variable'
+                                            className={classes.inputText}
+                                            onChange={(event) => {
+                                                dispatch(handleVarTitleChange(event, name))
+                                            }}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={4} className={classes.addGraph}>
+                                        <LightTooltip title="Add this variable to the graph" placement="top">
+                                            <a>
+                                                <img src="./add.svg" height="15px" width="auto" />
+                                            </a>
+                                        </LightTooltip>
+                                    </Grid>
+                                </Grid>
                             </Grid>
-                            {[1, 2, 3, 4, 5, 6].map(_ => {
+                            {v.vals.map(_ => {
                                 return (
                                     <Grid item className={classes.cell}>
-                                        <input type="text" className={classes.inputText} />
+                                        <input type="text" className={clsx(classes.inputText, classes.cellInput)} />
                                     </Grid>
                                 )
                             })}
                         </Grid>
                     )
-                })}
-            </div>
-        )
+                }
+            })}
+        </div>
     )
 }
 

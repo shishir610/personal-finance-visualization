@@ -6,7 +6,7 @@ export const addMain = () => {
         type: ADD_MAIN,
         payload: {
             name: '',
-            vals: ['','','','','','']
+            vals: [1,2,3,4,5,6,7]
         }
     }
 }
@@ -16,7 +16,7 @@ export const addSideHustles = () => {
         type: ADD_SIDE_HUSTLES,
         payload: {
             name: '',
-            vals: ['','','','','','']
+            vals: [1,2,3,4,5,6,7]
         }
     }
 }

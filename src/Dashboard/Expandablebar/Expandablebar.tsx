@@ -7,12 +7,12 @@ export interface ExpandablebarProps {
     name: string,
     units: number | null,
     addVar?: () => void
-    vars?: VarsProps[]
+    vars: VarsProps[]
 }
 
 export interface VarsProps {
     name: string,
-    vals: string[]
+    vals?: string[]
 }
 
 const useStyles = makeStyles(theme => {
@@ -51,11 +51,15 @@ const Expandablebar: React.FC<ExpandablebarProps> = ({ name, units, addVar, vars
     const classes = useStyles()
     const divRef = useRef<HTMLDivElement | null>(null)
 
-    const handleClick = () => {
+    const handleClick = (expand: boolean) => {
         const { current } = divRef
+        console.log(current != null && current.style.maxHeight)
         if (current != null) {
-            if (current.style.maxHeight) {
+            if (current.style.maxHeight && expand) {
                 current.style.maxHeight = ''
+            }
+            else if (!expand) {
+                current.style.maxHeight = current.scrollHeight + 37 + 'px';
             }
             else {
                 current.style.maxHeight = current.scrollHeight + 'px';
@@ -65,7 +69,7 @@ const Expandablebar: React.FC<ExpandablebarProps> = ({ name, units, addVar, vars
 
     return (
         <Fragment>
-            <a onClick={handleClick}>
+            <a onClick={() => handleClick(true)}>
                 <Grid container className={classes.root}>
                     <ArrowRightIcon color="secondary" fontSize='small' />
                     <p className={classes.name}>{name}</p>
@@ -73,7 +77,7 @@ const Expandablebar: React.FC<ExpandablebarProps> = ({ name, units, addVar, vars
                 </Grid>
             </a>
             <div ref={divRef} className={classes.expand}>
-                <ExpandedRow addVar={addVar} vars={vars} />
+                <ExpandedRow addVar={addVar} vars={vars} name={name} handleClick={handleClick} />
             </div>
         </Fragment>
     );

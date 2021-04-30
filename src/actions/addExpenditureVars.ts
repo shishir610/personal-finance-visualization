@@ -6,7 +6,7 @@ export const addRegular = () => {
         type: ADD_REGULAR,
         payload: {
             name: '',
-            vals: ['','','','','','']
+            vals: [1,2,3,4,5,6,7]
         }
     }
 }
@@ -16,7 +16,7 @@ export const addMiscellaneous = () => {
         type: ADD_MISC,
         payload: {
             name: '',
-            vals: ['','','','','','']
+            vals: [1,2,3,4,5,6,7]
         }
     }
 }

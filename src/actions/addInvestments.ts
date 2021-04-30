@@ -7,7 +7,7 @@ export const addStocks = () => {
         type: ADD_STOCKS,
         payload: {
             name: '',
-            vals: ['','','','','','']
+            vals: [1,2,3,4,5,6,7]
         }
     }
 }
@@ -17,7 +17,7 @@ export const addRealEstate = () => {
         type: ADD_REAL_ESTATE,
         payload: {
             name: '',
-            vals: ['','','','','','']
+            vals: [1,2,3,4,5,6,7]
         }
     }
 }
@@ -27,7 +27,7 @@ export const addCrypto = () => {
         type: ADD_CRYPTO,
         payload: {
             name: '',
-            vals: ['','','','','','']
+            vals: [1,2,3,4,5,6,7]
         }
     }
 }

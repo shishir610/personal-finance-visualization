@@ -6,7 +6,7 @@ export const addLiquid = () => {
         type: ADD_LIQUID,
         payload: {
             name: '',
-            vals: ['','','','','','']
+            vals: [1,2,3,4,5,6,7]
         }
     }
 }
@@ -16,7 +16,7 @@ export const addNonLiquid = () => {
         type: ADD_NON_LIQUID,
         payload: {
             name: '',
-            vals: ['','','','','','']
+            vals: [1,2,3,4,5,6,7]
         }
     }
 }
