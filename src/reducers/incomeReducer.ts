@@ -3,11 +3,13 @@ import {
   ADD_SIDE_HUSTLES,
   MAIN_TITLE_CHANGE,
   SIDE_HUSTLES_TITLE_CHANGE,
+  MAIN_VARS_CHANGE,
+  SIDE_HUSTLES_VARS_CHANGE,
 } from "../actions";
 
 let initialState = {
-  main: [{ name: "newVar" }],
-  sideHustles: [{ name: "newVar" }],
+  main: [{ name: "newVar", vals: [0, 0, 0, 0, 0, 0] }],
+  sideHustles: [{ name: "newVar", vals: [0, 0, 0, 0, 0, 0] }],
 };
 
 const incomeReducer = (
@@ -22,6 +24,7 @@ const incomeReducer = (
   ) {
     var { index, varName } = payload;
   }
+  var { main, sideHustles } = previousState;
   switch (type) {
     case ADD_MAIN:
       return {
@@ -46,7 +49,6 @@ const incomeReducer = (
         ],
       };
     case MAIN_TITLE_CHANGE:
-      let { main } = previousState;
       index = parseInt(index);
       let mainChange = main;
       mainChange[index]["name"] = varName;
@@ -55,13 +57,30 @@ const incomeReducer = (
         main: mainChange,
       };
     case SIDE_HUSTLES_TITLE_CHANGE:
-      let { sideHustles } = previousState;
       index = parseInt(index);
       let sideHustlesChange = sideHustles;
       sideHustlesChange[index]["name"] = varName;
       return {
         ...previousState,
         sideHustles: sideHustlesChange,
+      };
+    case MAIN_VARS_CHANGE:
+      let mainValsChange = main;
+      if (mainValsChange[payload.y]["vals"] !== undefined) {
+        mainValsChange[payload.y]["vals"][payload.x] = payload.varName;
+      }
+      return {
+        ...previousState,
+        main: mainValsChange,
+      };
+    case SIDE_HUSTLES_VARS_CHANGE:
+      let sideHustlesValsChange = sideHustles;
+      if (sideHustlesValsChange[payload.y]["vals"] !== undefined) {
+        sideHustlesValsChange[payload.y]["vals"][payload.x] = payload.varName;
+      }
+      return {
+        ...previousState,
+        sideHustles: sideHustlesValsChange,
       };
     default:
       return previousState;

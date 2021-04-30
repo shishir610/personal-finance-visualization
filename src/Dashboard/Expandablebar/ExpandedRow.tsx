@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { handleVarTitleChange } from '../../actions';
+import { handleVarChange } from '../../actions/varsChange';
 
 export interface ExpandedRowProps {
     addVar?: () => void,
@@ -121,7 +122,7 @@ const ExpandedRow: React.FC<ExpandedRowProps> = ({ addVar, vars, name, handleCli
 
     return (
         <div>
-            {vars.map((v, id) => {
+            {vars.map((v, y) => {
                 if (v.name === 'newVar' || v.vals == undefined) {
                     return (
                         <Grid container className={classes.root}
@@ -149,7 +150,7 @@ const ExpandedRow: React.FC<ExpandedRowProps> = ({ addVar, vars, name, handleCli
                                         <i className={`fab fa-slack-hash ${classes.icon} fa-xs`}></i>
                                         <input
                                             type="text"
-                                            id={`${id}`}
+                                            id={`${y}`}
                                             placeholder='New Variable'
                                             className={classes.inputText}
                                             onChange={(event) => {
@@ -166,10 +167,16 @@ const ExpandedRow: React.FC<ExpandedRowProps> = ({ addVar, vars, name, handleCli
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            {v.vals.map(_ => {
+                            {v.vals.map((val, x) => {
                                 return (
                                     <Grid item className={classes.cell}>
-                                        <input type="text" className={clsx(classes.inputText, classes.cellInput)} />
+                                        <input
+                                            type="text"
+                                            value={val ? val : ''}
+                                            placeholder={'0'}
+                                            className={clsx(classes.inputText, classes.cellInput)}
+                                            onChange={(e) => dispatch(handleVarChange(e, name, x, y))}
+                                        />
                                     </Grid>
                                 )
                             })}
