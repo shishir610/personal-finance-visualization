@@ -30,7 +30,7 @@ const PortfolioTab: React.FC<PortfolioTabProps> = () => {
     return (
         <Grid container alignItems="center" justify="center" className={classes.root}>
             <FiberManualRecordIcon color='primary' fontSize='inherit' />
-            <p className={classes.portfolio}>Default Portfolio</p>
+            <p className={classes.portfolio}>Main Portfolio</p>
         </Grid>
     );
 }

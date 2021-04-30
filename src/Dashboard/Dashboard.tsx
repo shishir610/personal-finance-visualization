@@ -7,7 +7,6 @@ import GraphingArea from './Graphing/GraphingArea';
 import Header from './Heading/Header';
 import MonthsTab from './Months/MonthsTab';
 import Topbar from './Topbar/Topbar';
-import RootState from '../store'
 
 export interface DashboardProps {
 
@@ -68,18 +67,18 @@ const Dashboard: React.FC<DashboardProps> = (props) => {
                 <Grid item md={8} className={classes.scrollable}>
                     <MonthsTab start='2020-10-01' end='2021-04-01' />
                     <Header name='INCOME' />
-                    <Expandablebar name="MAIN" units={0} addVar={addMain} vars={income['main']} />
-                    <Expandablebar name="SIDE HUSTLES" units={0} addVar={addSideHustles} vars={income['sideHustles']} />
+                    <Expandablebar name="MAIN" addVar={addMain} vars={income['main']} />
+                    <Expandablebar name="SIDE HUSTLES" addVar={addSideHustles} vars={income['sideHustles']} />
                     <Header name='EXPENDITURE' />
-                    <Expandablebar name="REGULAR" units={0} addVar={addRegular} vars={expenditure['regular']} />
-                    <Expandablebar name="MISCELLANEOUS" units={0} addVar={addMiscellaneous} vars={expenditure['miscellaneous']} />
+                    <Expandablebar name="REGULAR" addVar={addRegular} vars={expenditure['regular']} />
+                    <Expandablebar name="MISCELLANEOUS" addVar={addMiscellaneous} vars={expenditure['miscellaneous']} />
                     <Header name='ASSETS' />
-                    <Expandablebar name="LIQUID" units={0} addVar={addLiquid} vars={assets['liquid']} />
-                    <Expandablebar name="NON LIQUID" units={0} addVar={addNonLiquid} vars={assets['nonLiquid']} />
+                    <Expandablebar name="LIQUID" addVar={addLiquid} vars={assets['liquid']} />
+                    <Expandablebar name="NON LIQUID" addVar={addNonLiquid} vars={assets['nonLiquid']} />
                     <Header name='INVESTMENTS' />
-                    <Expandablebar name="STOCKS" units={0} addVar={addStocks} vars={investments['stocks']} />
-                    <Expandablebar name="REAL ESTATE" units={0} addVar={addRealEstate} vars={investments['realEstate']} />
-                    <Expandablebar name="CRYPTO" units={0} addVar={addCrypto} vars={investments['crypto']} />
+                    <Expandablebar name="STOCKS" addVar={addStocks} vars={investments['stocks']} />
+                    <Expandablebar name="REAL ESTATE" addVar={addRealEstate} vars={investments['realEstate']} />
+                    <Expandablebar name="CRYPTO" addVar={addCrypto} vars={investments['crypto']} />
                 </Grid>
                 <Grid item md={4} className={classes.graphingArea}>
                     <GraphingArea />

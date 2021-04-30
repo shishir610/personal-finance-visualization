@@ -1,5 +1,4 @@
 import { Grid, makeStyles } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
 import React from 'react';
 import PortfolioTab from './PortfolioTab';
 
@@ -22,7 +21,6 @@ const Topbar: React.FC<TopbarProps> = () => {
     return (
         <Grid container className={classes.root} alignItems="center">
             <PortfolioTab />
-            <AddIcon color='primary' fontSize='small' className={classes.addIcon} />
         </Grid>
     );
 }

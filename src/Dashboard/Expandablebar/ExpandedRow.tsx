@@ -1,9 +1,9 @@
-import { Grid, makeStyles, Theme, Tooltip, withStyles } from '@material-ui/core';
+import { Grid, makeStyles, Tooltip } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import clsx from 'clsx';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { handleVarTitleChange } from '../../actions';
+import { addGraph, handleVarTitleChange } from '../../actions';
 import { handleVarChange } from '../../actions/varsChange';
 
 export interface ExpandedRowProps {
@@ -87,7 +87,10 @@ const useStyles = makeStyles(theme => {
             padding: '0 10px'
         },
         cellInput: {
-            color: theme.palette.primary.dark
+            color: theme.palette.primary.dark,
+            '&::placeholder': {
+                color: theme.palette.primary.dark
+            }
         },
         icon: {
             color: theme.palette.secondary.main,
@@ -106,15 +109,6 @@ const useStyles = makeStyles(theme => {
         }
     }
 })
-
-const LightTooltip = withStyles((theme: Theme) => ({
-    tooltip: {
-        backgroundColor: theme.palette.common.white,
-        color: 'rgba(0, 0, 0, 0.87)',
-        boxShadow: theme.shadows[1],
-        fontSize: 11,
-    }
-}))(Tooltip);
 
 const ExpandedRow: React.FC<ExpandedRowProps> = ({ addVar, vars, name, handleClick }) => {
     const classes = useStyles()
@@ -147,7 +141,7 @@ const ExpandedRow: React.FC<ExpandedRowProps> = ({ addVar, vars, name, handleCli
                             <Grid item className={classes.varSection}>
                                 <Grid container style={{ height: '100%' }}>
                                     <Grid item xs={8} className={classes.newVar}>
-                                        <i className={`fab fa-slack-hash ${classes.icon} fa-xs`}></i>
+                                        <i className={`fas fa-chart-line ${classes.icon} fa-xs`}></i>
                                         <input
                                             type="text"
                                             id={`${y}`}
@@ -159,32 +153,34 @@ const ExpandedRow: React.FC<ExpandedRowProps> = ({ addVar, vars, name, handleCli
                                         />
                                     </Grid>
                                     <Grid item xs={4} className={classes.addGraph}>
-                                        <LightTooltip title="Add this variable to the graph" placement="top">
-                                            <a>
+                                        <Tooltip title="Add this variable to the graph" placement="top">
+                                            <a onClick={() => dispatch(addGraph(name, y))}>
                                                 <img src="./add.svg" height="15px" width="auto" />
                                             </a>
-                                        </LightTooltip>
+                                        </Tooltip>
                                     </Grid>
                                 </Grid>
                             </Grid>
-                            {v.vals.map((val, x) => {
-                                return (
-                                    <Grid item className={classes.cell}>
-                                        <input
-                                            type="text"
-                                            value={val ? val : ''}
-                                            placeholder={'0'}
-                                            className={clsx(classes.inputText, classes.cellInput)}
-                                            onChange={(e) => dispatch(handleVarChange(e, name, x, y))}
-                                        />
-                                    </Grid>
-                                )
-                            })}
+                            {
+                                v.vals.map((val, x) => {
+                                    return (
+                                        <Grid item className={classes.cell}>
+                                            <input
+                                                type="text"
+                                                value={val ? val : ''}
+                                                placeholder={'0'}
+                                                className={clsx(classes.inputText, classes.cellInput)}
+                                                onChange={(e) => dispatch(handleVarChange(e, name, x, y))}
+                                            />
+                                        </Grid>
+                                    )
+                                })
+                            }
                         </Grid>
                     )
                 }
             })}
-        </div>
+        </div >
     )
 }
 

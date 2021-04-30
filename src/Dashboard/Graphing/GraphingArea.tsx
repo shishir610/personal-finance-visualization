@@ -1,10 +1,15 @@
 import { Grid, makeStyles } from '@material-ui/core';
 import BarChartIcon from '@material-ui/icons/BarChart';
-import React from 'react';
-import Graph from './Graph';
+import React, { Fragment } from 'react';
+import { useSelector } from 'react-redux';
+import GraphContainer from './GraphContainer';
 
 export interface GraphingAreaProps {
 
+}
+
+export interface RootState {
+    graphing: { mainType: string, subType: string, index: number }[]
 }
 
 const useStyles = makeStyles(theme => {
@@ -38,14 +43,23 @@ const useStyles = makeStyles(theme => {
 const GraphingArea: React.FC<GraphingAreaProps> = () => {
     const classes = useStyles()
 
+    const mainData = useSelector((state: RootState) => state.graphing)
+
     return (
-        <Grid container className={classes.root}>
-            {/* <BarChartIcon color='secondary' classes={{ root: classes.barChart }} />
-            <p className={classes.noCharts}>
-                This portfolio has no charts!<br />
-                Create your first chart: select a variable and click on the new chart button
-            </p> */}
-            <Graph />
+        <Grid container className={classes.root} style={mainData.length === 0 ? { justifyContent: 'center' } : {}}>
+            {mainData.length === 0 ?
+                (
+                    <Fragment>
+                        <BarChartIcon color='secondary' classes={{ root: classes.barChart }} />
+                        <p className={classes.noCharts}>
+                            This portfolio has no charts!<br />
+                            Create your first chart: select a variable and click on the new chart button
+                        </p>
+                    </Fragment>
+                ) : (
+                    mainData.map(track =>
+                        <GraphContainer mainType={track.mainType} subType={track.subType} index={track.index} />)
+                )}
         </Grid>
     );
 }

@@ -4,3 +4,4 @@ export * from "./addAssets";
 export * from "./addInvestments";
 export * from "./varsTitleChange";
 export * from "./varsChange";
+export * from "./addGraph";

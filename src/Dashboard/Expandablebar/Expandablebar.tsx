@@ -5,7 +5,6 @@ import ExpandedRow from './ExpandedRow';
 
 export interface ExpandablebarProps {
     name: string,
-    units: number | null,
     addVar?: () => void
     vars: VarsProps[]
 }
@@ -47,13 +46,13 @@ const useStyles = makeStyles(theme => {
     }
 })
 
-const Expandablebar: React.FC<ExpandablebarProps> = ({ name, units, addVar, vars }) => {
+const Expandablebar: React.FC<ExpandablebarProps> = ({ name, addVar, vars }) => {
     const classes = useStyles()
     const divRef = useRef<HTMLDivElement | null>(null)
+    const units = vars.length - 1
 
     const handleClick = (expand: boolean) => {
         const { current } = divRef
-        console.log(current != null && current.style.maxHeight)
         if (current != null) {
             if (current.style.maxHeight && expand) {
                 current.style.maxHeight = ''
@@ -73,7 +72,7 @@ const Expandablebar: React.FC<ExpandablebarProps> = ({ name, units, addVar, vars
                 <Grid container className={classes.root}>
                     <ArrowRightIcon color="secondary" fontSize='small' />
                     <p className={classes.name}>{name}</p>
-                    <p className={classes.units}>{units} units</p>
+                    <p className={classes.units}>{units} {units === 1 ? 'unit' : 'units'}</p>
                 </Grid>
             </a>
             <div ref={divRef} className={classes.expand}>
